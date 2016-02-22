@@ -82,6 +82,8 @@ sub call {
 	
 	my $req = Plack::Request->new($env);
 	my $res = $req->new_response(200); # new Plack::Response
+	# FIX Chrome MIME Sniffing with Ubuntu 14.04 with Perl 5.18.x
+	$res->headers([ 'X-Content-Type-Options' => 'nosniff' ]);
 	$res->content_type('text/plain');
 	
 	my $body;
